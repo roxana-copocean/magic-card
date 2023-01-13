@@ -23,8 +23,10 @@ export default function App() {
 		const mixedCards = [ ...cardImages, ...cardImages ]
 			.sort(() => Math.random() - 0.5)
 			.map((card) => ({ ...card, id: Math.random() }));
-		setCards(mixedCards);
 		setTurns(0);
+		setChoiceOne(null);
+		setChoiceTwo(null);
+		setCards(mixedCards);
 	};
 
 	// handle a choice
@@ -65,6 +67,11 @@ export default function App() {
 		setTurns((prevTurns) => prevTurns + 1);
 		setDisabled(false);
 	};
+
+	// start a new game automatically
+	useEffect(() => {
+		mixCards();
+	}, []);
 	return (
 		<div className="App">
 			<h1>Magic Match</h1>
@@ -81,6 +88,7 @@ export default function App() {
 					/>
 				))}
 			</div>
+			<p>Turns: {turns} </p>
 		</div>
 	);
 }
